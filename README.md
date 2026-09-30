@@ -6,8 +6,7 @@ The application is built with **Streamlit** and supports TXT, PDF, and DOCX file
 
 ## 🚀 Live Demo
 
-[Open the Plagiarism Detection System](YOUR_STREAMLIT_APP_LINK)
-
+The application is deployed using Streamlit.
 ## 📌 Project Overview
 
 This project analyzes multiple documents and calculates the textual similarity between every pair of documents.
