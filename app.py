@@ -6,6 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from pypdf import PdfReader
 from docx import Document
 
+
 def classify_similarity(score):
     if score < 15:
         return "Low similarity"
@@ -13,6 +14,7 @@ def classify_similarity(score):
         return "Moderate similarity"
     else:
         return "High similarity"
+
 
 def extract_text(file):
 
@@ -41,6 +43,8 @@ def extract_text(file):
         return text
 
     return ""
+
+
 def compare_documents(documents):
 
     document_names = list(documents.keys())
@@ -80,17 +84,39 @@ st.set_page_config(
     layout="wide"
 )
 
+
 st.title("📄 Plagiarism Detection System")
 
 st.write(
-    "Upload two or more text documents to calculate their textual similarity."
+    "Upload two or more documents to calculate their textual similarity "
+    "using TF-IDF and cosine similarity."
 )
+
+
+with st.expander("ℹ️ How does this system work?"):
+
+    st.write(
+        "This system converts the uploaded documents into TF-IDF vectors "
+        "and uses cosine similarity to measure how similar the documents "
+        "are to each other."
+    )
+
+    st.write(
+        "**Supported file types:** TXT, PDF, and DOCX."
+    )
+
+    st.write(
+        "**Important:** A high similarity score indicates substantial "
+        "textual overlap, but it does not by itself prove plagiarism."
+    )
+
 
 uploaded_files = st.file_uploader(
     "Upload documents",
     type=["txt", "pdf", "docx"],
     accept_multiple_files=True
 )
+
 
 if uploaded_files:
 
@@ -137,11 +163,9 @@ if uploaded_files:
             f"{highest_similarity:.2f}%"
         )
 
-        # Most Similar Document Pair
+        st.subheader("Most Similar Document Pair")
 
         most_similar = results_df.iloc[0]
-
-        st.subheader("Most Similar Document Pair")
 
         st.write(
             f"**{most_similar['Document 1']}** ↔ "
