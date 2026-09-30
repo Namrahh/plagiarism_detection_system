@@ -143,7 +143,8 @@ if uploaded_files:
             results_df,
             use_container_width=True
         )
-                st.subheader("Similarity Chart")
+
+        st.subheader("Similarity Chart")
 
         chart_data = results_df.set_index(
             results_df["Document 1"] + " vs " + results_df["Document 2"]
@@ -152,6 +153,7 @@ if uploaded_files:
         st.bar_chart(chart_data)
 
         csv = results_df.to_csv(index=False)
+
         st.download_button(
             label="Download Results CSV",
             data=csv,
