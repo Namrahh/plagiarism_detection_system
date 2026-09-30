@@ -99,7 +99,7 @@ if uploaded_files:
 
     else:
 
-        ddocuments = {}
+        documents = {}
 
 for file in uploaded_files:
     text = extract_text(file)
