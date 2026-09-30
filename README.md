@@ -79,17 +79,6 @@ The application displays:
 
 Users can also download the results as a CSV file.
 
-## 📸 Screenshots
-
-### Main Interface
-![Main Interface](screenshot-main.png)
-
-### Analysis Results
-![Analysis Results](screenshot-results.png)
-
-### Similarity Chart
-![Similarity Chart](screenshot-chart.png)
-
 ## 🛠️ Technologies Used
 
 - Python
