@@ -1,34 +1,101 @@
-# Plagiarism Detection System
+# 📄 Plagiarism Detection System
 
-A Python-based text similarity detection system that compares multiple documents using TF-IDF and Cosine Similarity.
+A Python-based document similarity application that compares multiple documents using **TF-IDF vectorization** and **Cosine Similarity**.
 
-## Features
+The application is built with **Streamlit** and supports TXT, PDF, and DOCX files.
 
-- Upload multiple text documents
-- Calculate similarity percentages
-- Classify similarity as Low, Moderate, or High
-- View results in a table
-- Download results as a CSV file
+## 🚀 Live Demo
 
-## How It Works
+[Open the Plagiarism Detection System](YOUR_STREAMLIT_APP_LINK)
 
-1. Documents are uploaded by the user.
-2. Text is converted into TF-IDF vectors.
-3. Cosine Similarity is calculated between document pairs.
-4. Similarity scores are converted into percentages.
-5. Results are classified using the following thresholds:
+## 📌 Project Overview
 
-- Below 15% → Low similarity
-- 15% to below 24% → Moderate similarity
-- 24% or above → High similarity
+This project analyzes multiple documents and calculates the textual similarity between every pair of documents.
 
-## Technologies Used
+The system provides:
+
+- Similarity percentage between document pairs
+- Low, Moderate, and High similarity classification
+- Analysis summary
+- Most similar document pair
+- Similarity chart
+- Downloadable CSV results
+- Support for TXT, PDF, and DOCX documents
+- Validation for documents with no readable text
+
+## 🧠 How It Works
+
+### 1. Document Upload
+
+Users can upload two or more:
+
+- `.txt`
+- `.pdf`
+- `.docx`
+
+files.
+
+### 2. Text Extraction
+
+Text is extracted from each uploaded document.
+
+- TXT files are decoded directly.
+- PDF files are processed using `pypdf`.
+- DOCX files are processed using `python-docx`.
+
+### 3. TF-IDF Vectorization
+
+The extracted text is converted into numerical vectors using **TF-IDF (Term Frequency-Inverse Document Frequency)**.
+
+### 4. Cosine Similarity
+
+Cosine similarity is used to calculate how similar the document vectors are.
+
+The similarity score is converted into a percentage.
+
+### 5. Similarity Classification
+
+The project uses the following project-specific thresholds:
+
+| Similarity Score | Classification |
+|---|---|
+| Less than 15% | Low similarity |
+| 15% to less than 24% | Moderate similarity |
+| 24% or higher | High similarity |
+
+These thresholds are used for this project and are not universal plagiarism standards.
+
+## 📊 Results
+
+The application displays:
+
+- Total number of documents
+- Number of high-similarity pairs
+- Number of moderate-similarity pairs
+- Number of low-similarity pairs
+- Highest similarity score
+- Most similar document pair
+- Complete pairwise similarity results
+- Similarity visualization
+
+Users can also download the results as a CSV file.
+
+## 🛠️ Technologies Used
 
 - Python
+- Streamlit
 - Pandas
 - Scikit-learn
-- Streamlit
+- TF-IDF
+- Cosine Similarity
+- PyPDF
+- Python-docx
 
-## Important Note
+## 📁 Project Structure
 
-This project measures textual similarity. A high similarity score does not by itself prove plagiarism. The classification thresholds are project-specific and are intended for demonstration.
+```text
+plagiarism_detection_system/
+│
+├── app.py
+├── requirements.txt
+└── README.md
