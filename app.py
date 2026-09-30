@@ -3,7 +3,8 @@ import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+from pypdf import PdfReader
+from docx import Document
 
 def classify_similarity(score):
     if score < 15:
@@ -13,7 +14,33 @@ def classify_similarity(score):
     else:
         return "High similarity"
 
+def extract_text(file):
 
+    if file.name.endswith(".txt"):
+        return file.read().decode(
+            "utf-8",
+            errors="ignore"
+        )
+
+    elif file.name.endswith(".pdf"):
+        reader = PdfReader(file)
+        text = ""
+
+        for page in reader.pages:
+            text += page.extract_text() or ""
+
+        return text
+
+    elif file.name.endswith(".docx"):
+        document = Document(file)
+        text = ""
+
+        for paragraph in document.paragraphs:
+            text += paragraph.text + "\n"
+
+        return text
+
+    return ""
 def compare_documents(documents):
 
     document_names = list(documents.keys())
@@ -72,15 +99,11 @@ if uploaded_files:
 
     else:
 
-        documents = {}
+        ddocuments = {}
 
-        for file in uploaded_files:
-            text = file.read().decode(
-                "utf-8",
-                errors="ignore"
-            )
-
-            documents[file.name] = text
+for file in uploaded_files:
+    text = extract_text(file)
+    documents[file.name] = text
 
         results_df = compare_documents(documents)
 
