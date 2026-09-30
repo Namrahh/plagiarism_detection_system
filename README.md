@@ -103,9 +103,9 @@ Users can also download the results as a CSV file.
 
 ## 📁 Project Structure
 
-```## ▶️ Run Locally
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Namrahh/plagiarism_detection_system.git
+```text
+plagiarism_detection_system/
+│
+├── app.py
+├── requirements.txt
+└── README.md
