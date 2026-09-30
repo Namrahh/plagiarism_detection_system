@@ -101,9 +101,9 @@ if uploaded_files:
 
         documents = {}
 
-for file in uploaded_files:
-    text = extract_text(file)
-    documents[file.name] = text
+        for file in uploaded_files:
+            text = extract_text(file)
+            documents[file.name] = text
 
         results_df = compare_documents(documents)
 
