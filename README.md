@@ -109,3 +109,52 @@ plagiarism_detection_system/
 ├── app.py
 ├── requirements.txt
 └── README.md
+```
+## ▶️ Run Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Namrahh/plagiarism_detection_system.git
+```
+
+Move into the project directory:
+
+```bash
+cd plagiarism_detection_system
+```
+
+Install the required libraries:
+```bash
+pip install -r requirements.txt
+```
+
+Run the Streamlit application:
+```bash
+streamlit run app.py
+```
+
+## ⚠️ Important Note
+
+This application measures **textual similarity** between documents.
+
+A high similarity score indicates substantial textual overlap, but it does not by itself prove plagiarism.
+
+The system also works best with documents containing selectable/extractable text. Scanned image-only PDFs may require OCR before their text can be analyzed.
+
+## 🔮 Future Improvements
+
+Possible future improvements include:
+
+- OCR support for scanned PDFs
+- Highlighting matching text between documents
+- Improved NLP preprocessing
+- Semantic similarity using sentence embeddings
+- Larger document collections
+- More advanced plagiarism analysis
+
+## 👩‍💻 Author
+
+**Namra Aftab**
+
+This project was developed as part of my portfolio while building practical skills in Python, NLP, machine learning, and data analytics.
