@@ -103,14 +103,7 @@ Users can also download the results as a CSV file.
 
 ## 📁 Project Structure
 
-```text
-plagiarism_detection_system/
-│
-├── app.py
-├── requirements.txt
-└── README.md
-
-## ▶️ Run Locally
+```## ▶️ Run Locally
 
 Clone the repository:
 
