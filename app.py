@@ -137,6 +137,22 @@ if uploaded_files:
             f"{highest_similarity:.2f}%"
         )
 
+        # Most Similar Document Pair
+
+        most_similar = results_df.iloc[0]
+
+        st.subheader("Most Similar Document Pair")
+
+        st.write(
+            f"**{most_similar['Document 1']}** ↔ "
+            f"**{most_similar['Document 2']}**"
+        )
+
+        st.metric(
+            "Similarity",
+            f"{most_similar['Similarity (%)']:.2f}%"
+        )
+
         st.subheader("Similarity Results")
 
         st.dataframe(
