@@ -107,7 +107,7 @@ if uploaded_files:
 
         results_df = compare_documents(documents)
 
-                st.subheader("Analysis Summary")
+        st.subheader("Analysis Summary")
 
         total_documents = len(documents)
 
@@ -136,6 +136,7 @@ if uploaded_files:
             "Highest Similarity",
             f"{highest_similarity:.2f}%"
         )
+
         st.subheader("Similarity Results")
 
         st.dataframe(
