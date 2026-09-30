@@ -107,6 +107,35 @@ if uploaded_files:
 
         results_df = compare_documents(documents)
 
+                st.subheader("Analysis Summary")
+
+        total_documents = len(documents)
+
+        high_count = (
+            results_df["Result"] == "High similarity"
+        ).sum()
+
+        moderate_count = (
+            results_df["Result"] == "Moderate similarity"
+        ).sum()
+
+        low_count = (
+            results_df["Result"] == "Low similarity"
+        ).sum()
+
+        highest_similarity = results_df["Similarity (%)"].max()
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric("Documents", total_documents)
+        col2.metric("High Similarity", high_count)
+        col3.metric("Moderate Similarity", moderate_count)
+        col4.metric("Low Similarity", low_count)
+
+        st.metric(
+            "Highest Similarity",
+            f"{highest_similarity:.2f}%"
+        )
         st.subheader("Similarity Results")
 
         st.dataframe(
