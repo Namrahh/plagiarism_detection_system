@@ -131,72 +131,93 @@ if uploaded_files:
             text = extract_text(file)
             documents[file.name] = text
 
-        results_df = compare_documents(documents)
+        empty_documents = [
+            name
+            for name, text in documents.items()
+            if not text.strip()
+        ]
 
-        st.subheader("Analysis Summary")
+        if empty_documents:
 
-        total_documents = len(documents)
+            st.error(
+                "The following document(s) do not contain readable text:"
+            )
 
-        high_count = (
-            results_df["Result"] == "High similarity"
-        ).sum()
+            for name in empty_documents:
+                st.write(f"- {name}")
 
-        moderate_count = (
-            results_df["Result"] == "Moderate similarity"
-        ).sum()
+            st.info(
+                "Please upload documents that contain readable text."
+            )
 
-        low_count = (
-            results_df["Result"] == "Low similarity"
-        ).sum()
+        else:
 
-        highest_similarity = results_df["Similarity (%)"].max()
+            results_df = compare_documents(documents)
 
-        col1, col2, col3, col4 = st.columns(4)
+            st.subheader("Analysis Summary")
 
-        col1.metric("Documents", total_documents)
-        col2.metric("High Similarity", high_count)
-        col3.metric("Moderate Similarity", moderate_count)
-        col4.metric("Low Similarity", low_count)
+            total_documents = len(documents)
 
-        st.metric(
-            "Highest Similarity",
-            f"{highest_similarity:.2f}%"
-        )
+            high_count = (
+                results_df["Result"] == "High similarity"
+            ).sum()
 
-        st.subheader("Most Similar Document Pair")
+            moderate_count = (
+                results_df["Result"] == "Moderate similarity"
+            ).sum()
 
-        most_similar = results_df.iloc[0]
+            low_count = (
+                results_df["Result"] == "Low similarity"
+            ).sum()
 
-        st.write(
-            f"**{most_similar['Document 1']}** ↔ "
-            f"**{most_similar['Document 2']}**"
-        )
+            highest_similarity = results_df["Similarity (%)"].max()
 
-        st.metric(
-            "Similarity",
-            f"{most_similar['Similarity (%)']:.2f}%"
-        )
+            col1, col2, col3, col4 = st.columns(4)
 
-        st.subheader("Similarity Results")
+            col1.metric("Documents", total_documents)
+            col2.metric("High Similarity", high_count)
+            col3.metric("Moderate Similarity", moderate_count)
+            col4.metric("Low Similarity", low_count)
 
-        st.dataframe(
-            results_df,
-            use_container_width=True
-        )
+            st.metric(
+                "Highest Similarity",
+                f"{highest_similarity:.2f}%"
+            )
 
-        st.subheader("Similarity Chart")
+            st.subheader("Most Similar Document Pair")
 
-        chart_data = results_df.set_index(
-            results_df["Document 1"] + " vs " + results_df["Document 2"]
-        )["Similarity (%)"]
+            most_similar = results_df.iloc[0]
 
-        st.bar_chart(chart_data)
+            st.write(
+                f"**{most_similar['Document 1']}** ↔ "
+                f"**{most_similar['Document 2']}**"
+            )
 
-        csv = results_df.to_csv(index=False)
+            st.metric(
+                "Similarity",
+                f"{most_similar['Similarity (%)']:.2f}%"
+            )
 
-        st.download_button(
-            label="Download Results CSV",
-            data=csv,
-            file_name="plagiarism_results.csv",
-            mime="text/csv"
-        )
+            st.subheader("Similarity Results")
+
+            st.dataframe(
+                results_df,
+                use_container_width=True
+            )
+
+            st.subheader("Similarity Chart")
+
+            chart_data = results_df.set_index(
+                results_df["Document 1"] + " vs " + results_df["Document 2"]
+            )["Similarity (%)"]
+
+            st.bar_chart(chart_data)
+
+            csv = results_df.to_csv(index=False)
+
+            st.download_button(
+                label="Download Results CSV",
+                data=csv,
+                file_name="plagiarism_results.csv",
+                mime="text/csv"
+            )
